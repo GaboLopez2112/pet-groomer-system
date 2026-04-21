@@ -1,0 +1,17 @@
+POST http://localhost:3000/customers/nuevoCliente
+Content-Type: application/json
+
+{
+  "cedula": "1751459057",
+  "nombre": "CLIENTE2",
+  "celular": "0962823363",
+  "celular_opcional": "",
+  "email": "gaboaxlslashhh@hotmail.com"
+}
+
+###
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=WebStorm
+
+###

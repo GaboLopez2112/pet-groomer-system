@@ -1,0 +1,16 @@
+POST http://localhost:3000/services/nuevoServicio
+Content-Type: application/json
+
+{
+  "nombre": "corte de uñas2",
+  "descripcion": "Corte con limadora",
+  "costo": 5.60,
+  "estado": true
+}
+
+###
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=WebStorm
+
+###
