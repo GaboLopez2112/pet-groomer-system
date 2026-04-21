@@ -1,3 +1,15 @@
+POST http://localhost:3000/pets/nuevaMascota
+Content-Type: application/json
+
+{
+  "nombre": "negro",
+  "raza": "LABRADOR",
+  "edad": 2,
+  "edad_unidad": "punto",
+  "cliente": "0423cb56-fe93-4984-ba2f-5f5a1e17b535"
+}
+
+###
 ### GET request to example server
 GET https://examples.http-client.intellij.net/get
     ?generated-in=WebStorm

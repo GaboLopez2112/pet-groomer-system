@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:18
+    container_name: petgroomer_db
+    restart: always
+
+    environment:
+      POSTGRES_USER: galopez
+      POSTGRES_PASSWORD: "g#21/lopez"
+      POSTGRES_DB: petgroomersystem
+
+    ports:
+      - "5437:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+volumes:
+  postgres_data:
