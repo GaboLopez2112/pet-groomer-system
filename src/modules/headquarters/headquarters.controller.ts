@@ -1,14 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { HeadquartersService } from './headquarters.service';
-import { CreateHeadquartersDto } from './dto/create-headquarters.dto';
-import { UpdateHeadquartersDto } from './dto/update-headquarters.dto';
+import { HeadquartersDto } from './dto/headquarters.dto';
+import { UpdateHeadquartersDto } from './dto/headquarters.dto';
 
 @Controller('headquarters')
 export class HeadquartersController {
   constructor(private readonly headquartersService: HeadquartersService) {}
 
-  @Post()
-  create(@Body() createHeadquartersDto: CreateHeadquartersDto) {
+  @Post('nuevaSucursal')
+  create(@Body() createHeadquartersDto: HeadquartersDto) {
     return this.headquartersService.create(createHeadquartersDto);
   }
 
@@ -23,7 +31,10 @@ export class HeadquartersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateHeadquartersDto: UpdateHeadquartersDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateHeadquartersDto: UpdateHeadquartersDto,
+  ) {
     return this.headquartersService.update(+id, updateHeadquartersDto);
   }
 

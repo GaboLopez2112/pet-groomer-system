@@ -2,11 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { UpperCaseTransformer } from '../../../communs/upercase/uppercase';
+import { Appointment } from '../../appointment/entities/appointment.entity';
 
 @Entity('service')
 export class Service {
@@ -49,4 +51,6 @@ export class Service {
   created_at: Date;
   @UpdateDateColumn()
   updated_at: Date;
+  @OneToMany(() => Appointment, (appointment) => appointment.servicio)
+  citas: Appointment[];
 }

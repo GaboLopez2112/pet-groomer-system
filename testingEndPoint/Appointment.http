@@ -1,0 +1,35 @@
+GET http://localhost:3000/appointment?fecha=2026-05-20&sucursal=2876d94e-2dec-4034-9993-e54336f26beb
+Accept: application/json
+
+###
+PUT http://localhost:3000/appointment/c6095063-2add-43b1-b337-6a27414d5b77
+Content-Type: application/json
+
+{
+  "id_servicio":"b3e85694-79d7-483d-ab32-0af2f504753d"
+}
+
+###
+GET http://localhost:3000/appointment?fecha=2026-05-20
+Accept: application/json
+
+###
+POST http://localhost:3000/appointment/nuevaCita
+Content-Type: application/json
+
+{
+  "id_mascota": "554c4960-7249-464c-abd8-08f76aa3d140",
+  "id_servicio": "d09e0662-1ee9-42e5-8929-4b145f87ed78",
+  "id_peluquero": "672f8ead-e384-4748-98a6-87815502a426",
+  "id_sucursal": "2876d94e-2dec-4034-9993-e54336f26beb",
+  "fecha": "2026-05-21",
+  "hora": "11:30:00",
+  "estado": "pendiente"
+}
+
+###
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=WebStorm
+
+###

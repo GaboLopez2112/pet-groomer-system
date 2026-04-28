@@ -2,11 +2,11 @@ POST http://localhost:3000/customers/nuevoCliente
 Content-Type: application/json
 
 {
-  "cedula": "1751459057",
-  "nombre": "CLIENTE2",
-  "celular": "0962823363",
-  "celular_opcional": "",
-  "email": "gaboaxlslashhh@hotmail.com"
+  "cedula": "1751459048",
+  "nombre": "Dylan",
+  "celular": "0962823354",
+  "celular_opcional": "2600505228",
+  "email": "dylanhhh@hotmail.com"
 }
 
 ###

@@ -4,6 +4,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -11,6 +12,7 @@ import { Customer } from '../../customers/entities/customer.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { AgeUnit } from '../../../communs/enums/enums';
 import { UpperCaseTransformer } from '../../../communs/upercase/uppercase';
+import { Appointment } from '../../appointment/entities/appointment.entity';
 @Entity('mascotas')
 export class Pet {
   @PrimaryGeneratedColumn('uuid')
@@ -79,4 +81,6 @@ export class Pet {
     },
   })
   cliente: Customer;
+  @OneToMany(() => Appointment, (appointment) => appointment.mascota)
+  citas: Appointment[];
 }

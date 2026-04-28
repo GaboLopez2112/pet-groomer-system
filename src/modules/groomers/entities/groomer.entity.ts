@@ -2,14 +2,16 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { UpperCaseTransformer } from '../../../communs/upercase/uppercase';
 import { LowerCaseTransformer } from '../../../communs/lowerCase/loweCase';
+import { Appointment } from '../../appointment/entities/appointment.entity';
 
-@Entity('groomer')
+@Entity('groomers')
 export class Groomer {
   @ApiProperty({
     example: '123e4600-e89b-12d3-a456-426614174000',
@@ -62,4 +64,6 @@ export class Groomer {
   created_at: Date;
   @UpdateDateColumn()
   updated_at: Date;
+  @OneToMany(() => Appointment, (appointment) => appointment.peluquero)
+  citas: Appointment[];
 }

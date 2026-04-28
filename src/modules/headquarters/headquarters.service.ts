@@ -1,11 +1,29 @@
-import { Injectable } from '@nestjs/common';
-import { CreateHeadquartersDto } from './dto/create-headquarters.dto';
-import { UpdateHeadquartersDto } from './dto/update-headquarters.dto';
+import { ConflictException, Injectable } from '@nestjs/common';
+import { HeadquartersDto } from './dto/headquarters.dto';
+import { UpdateHeadquartersDto } from './dto/headquarters.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Headquarters } from './entities/headquarters.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class HeadquartersService {
-  create(createHeadquartersDto: CreateHeadquartersDto) {
-    return 'This action adds a new headquarters';
+  constructor(
+    @InjectRepository(Headquarters)
+    private readonly headquartersRepository: Repository<Headquarters>,
+  ) {}
+  async create(createHeadquartersDto: HeadquartersDto) {
+    const existingBranch = await this.headquartersRepository.findOne({
+      where: { nombre: createHeadquartersDto.nombre },
+    });
+
+    if (existingBranch) {
+      throw new ConflictException(
+        `La sucursal "${createHeadquartersDto.nombre}" ya existe`,
+      );
+    }
+
+    const branch = this.headquartersRepository.create(createHeadquartersDto);
+    return await this.headquartersRepository.save(branch);
   }
 
   findAll() {

@@ -1,11 +1,39 @@
-import { Injectable } from '@nestjs/common';
-import { CreateGroomerDto } from './dto/create-groomer.dto';
-import { UpdateGroomerDto } from './dto/update-groomer.dto';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { GroomerDto } from './dto/groomer.dto';
+import { UpdateGroomerDto } from './dto/groomer.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Groomer } from './entities/groomer.entity';
 
 @Injectable()
 export class GroomersService {
-  create(createGroomerDto: CreateGroomerDto) {
-    return 'This action adds a new groomer';
+  constructor(
+    @InjectRepository(Groomer)
+    private readonly groomersRepository: Repository<Groomer>,
+  ) {}
+  async create(createGroomerDto: GroomerDto) {
+    const [existingGroomerByCedula, existingGroomerByEmail] = await Promise.all(
+      [
+        this.groomersRepository.findOne({
+          where: { cedula: createGroomerDto.cedula },
+        }),
+        this.groomersRepository.findOne({
+          where: { email: createGroomerDto.email },
+        }),
+      ],
+    );
+    if (existingGroomerByCedula) {
+      throw new BadRequestException(
+        `La cédula ${createGroomerDto.cedula} ya está registrada`,
+      );
+    }
+    if (existingGroomerByEmail) {
+      throw new BadRequestException(
+        `El email ${createGroomerDto.email} ya está registrado`,
+      );
+    }
+    const groomer = this.groomersRepository.create(createGroomerDto);
+    return await this.groomersRepository.save(groomer);
   }
 
   findAll() {
